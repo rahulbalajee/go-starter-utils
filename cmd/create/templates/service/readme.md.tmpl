@@ -1,0 +1,57 @@
+# {{.Name}} service
+
+This service handles all {{.Name}}-related operations in the system.
+
+## Architecture
+
+The service follows Clean Architecture principles with the following structure:
+
+```
+{{.Name}}-service/
+├── cmd/
+│   └── main.go              # Application entry point
+├── internal/
+│   ├── domain/
+│   │   └── {{.Name}}.go     # Business domain models and interfaces
+│   ├── service/
+│   │   └── service.go       # Business logic implementation
+│   └── infrastructure/
+│       ├── events/           # Event handling
+│       ├── grpc/             # gRPC server handlers
+│       ├── http/             # HTTP server handlers
+│       └── repository/       # Data persistence
+├── pkg/
+│   └── types/
+│       └── types.go          # Shared types and models
+├── go.mod
+└── README.md
+```
+
+### Layer Responsibilities
+
+1. **Domain Layer** (`internal/domain/`)
+   - Contains business domain interfaces
+   - Defines contracts for repositories and services
+   - Pure business logic, no implementation details
+
+2. **Service Layer** (`internal/service/`)
+   - Implements business logic
+   - Uses repository interfaces
+   - Coordinates between different parts of the system
+
+3. **Infrastructure Layer** (`internal/infrastructure/`)
+   - `repository/`: Implements data persistence
+   - `events/`: Handles event publishing and consuming
+   - `grpc/`: Handles gRPC communication
+   - `http/`: Handles HTTP communication
+
+4. **Public Types** (`pkg/types/`)
+   - Contains shared types and models
+   - Can be imported by other services
+
+## Getting Started
+
+```bash
+go mod tidy
+go run cmd/main.go
+```

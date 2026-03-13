@@ -1,0 +1,21 @@
+package domain
+
+import "context"
+
+type {{.PascalName}} struct {
+	ID string
+}
+
+type {{.PascalName}}Repository interface {
+	Get(ctx context.Context, id string) (*{{.PascalName}}, error)
+	Create(ctx context.Context, entity *{{.PascalName}}) error
+	Update(ctx context.Context, entity *{{.PascalName}}) error
+	Delete(ctx context.Context, id string) error
+}
+
+type {{.PascalName}}Service interface {
+	Get(ctx context.Context, id string) (*{{.PascalName}}, error)
+	Create(ctx context.Context, entity *{{.PascalName}}) error
+	Update(ctx context.Context, entity *{{.PascalName}}) error
+	Delete(ctx context.Context, id string) error
+}

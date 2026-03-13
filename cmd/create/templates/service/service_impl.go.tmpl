@@ -1,0 +1,31 @@
+package service
+
+import (
+	"context"
+
+	"{{.ModulePath}}/internal/domain"
+)
+
+type {{.PascalName}}Service struct {
+	repo domain.{{.PascalName}}Repository
+}
+
+func New{{.PascalName}}Service(repo domain.{{.PascalName}}Repository) *{{.PascalName}}Service {
+	return &{{.PascalName}}Service{repo: repo}
+}
+
+func (s *{{.PascalName}}Service) Get(ctx context.Context, id string) (*domain.{{.PascalName}}, error) {
+	return s.repo.Get(ctx, id)
+}
+
+func (s *{{.PascalName}}Service) Create(ctx context.Context, entity *domain.{{.PascalName}}) error {
+	return s.repo.Create(ctx, entity)
+}
+
+func (s *{{.PascalName}}Service) Update(ctx context.Context, entity *domain.{{.PascalName}}) error {
+	return s.repo.Update(ctx, entity)
+}
+
+func (s *{{.PascalName}}Service) Delete(ctx context.Context, id string) error {
+	return s.repo.Delete(ctx, id)
+}
