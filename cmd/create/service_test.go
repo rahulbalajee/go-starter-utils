@@ -3,6 +3,7 @@ package create
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -148,7 +149,7 @@ func TestScaffoldServiceGeneratedContent(t *testing.T) {
 		"type OrderService interface",
 	}
 	for _, check := range checks {
-		if !contains(string(domainContent), check) {
+		if !strings.Contains(string(domainContent), check) {
 			t.Errorf("domain file missing expected content: %q", check)
 		}
 	}
@@ -165,7 +166,7 @@ func TestScaffoldServiceGeneratedContent(t *testing.T) {
 		`"order-service/internal/domain"`,
 	}
 	for _, check := range svcChecks {
-		if !contains(string(svcContent), check) {
+		if !strings.Contains(string(svcContent), check) {
 			t.Errorf("service file missing expected content: %q", check)
 		}
 	}
@@ -174,7 +175,7 @@ func TestScaffoldServiceGeneratedContent(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to read go.mod: %v", err)
 	}
-	if !contains(string(modContent), "module order-service") {
+	if !strings.Contains(string(modContent), "module order-service") {
 		t.Error("go.mod missing expected module path")
 	}
 }
@@ -197,20 +198,7 @@ func TestScaffoldServiceKebabCase(t *testing.T) {
 		t.Fatalf("failed to read domain file: %v", err)
 	}
 
-	if !contains(string(domainContent), "type OrderStatus struct") {
+	if !strings.Contains(string(domainContent), "type OrderStatus struct") {
 		t.Error("kebab-case name not properly converted to PascalCase in domain")
 	}
-}
-
-func contains(s, substr string) bool {
-	return len(s) >= len(substr) && searchString(s, substr)
-}
-
-func searchString(s, substr string) bool {
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
 }
