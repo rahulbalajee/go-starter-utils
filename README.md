@@ -4,6 +4,25 @@ A CLI toolkit for scaffolding Go microservices with hexagonal / clean architectu
 
 ## Installation
 
+### Download a release
+
+Grab the latest binary from [GitHub Releases](https://github.com/rahulbalajee/go-starter-utils/releases/latest).
+
+```bash
+# macOS (Apple Silicon)
+curl -sL https://github.com/rahulbalajee/go-starter-utils/releases/latest/download/go-starter-utils_darwin_arm64.tar.gz | tar xz
+# macOS (Intel)
+curl -sL https://github.com/rahulbalajee/go-starter-utils/releases/latest/download/go-starter-utils_darwin_amd64.tar.gz | tar xz
+# Linux (amd64)
+curl -sL https://github.com/rahulbalajee/go-starter-utils/releases/latest/download/go-starter-utils_linux_amd64.tar.gz | tar xz
+
+# Move to your PATH
+sudo mv go-starter-utils /usr/local/bin/
+
+# macOS only: remove quarantine flag
+xattr -d com.apple.quarantine /usr/local/bin/go-starter-utils
+```
+
 ### From source
 
 ```bash
